@@ -2,7 +2,7 @@
   <nav class="navbar is-success" role="navigation" aria-label="main navigation">
     <div class="container is-max-dekstop px-2">
       <div class="navbar-brand">
-        <div class="navbar-item is-size-4 is-family-monospace">NoteBalls</div>
+        <div class="navbar-item is-size-4 is-family-monospace has-text-white">NoteBalls</div>
         <a
           @click.prevent="showMobileMenu = !showMobileMenu"
           :class="{ 'is-active': showMobileMenu }"
@@ -28,14 +28,14 @@
           <RouterLink
             to="/"
             active-class="is-active"
-            class="navbar-item is-size-5 is-family-monospace"
+            class="navbar-item is-size-5 is-family-monospace has-text-white"
           >
             Notes
           </RouterLink>
           <RouterLink
             to="/stats"
             active-class="is-active"
-            class="navbar-item is-size-5 is-family-monospace"
+            class="navbar-item is-size-5 is-family-monospace has-text-white"
           >
             Stats
           </RouterLink>
