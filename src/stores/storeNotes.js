@@ -38,5 +38,10 @@ export const useStoreNotes = defineStore("storeNotes", {
       this.notes.unshift(note);
       //   notes.value.unshift(note); // using unshift to store the latest entry at the top
     },
+    deleteNote(id) {
+      this.notes = this.notes.filter((note) => {
+        return note.id != id;
+      }); // using filter hiding the passed note id
+    },
   },
 });

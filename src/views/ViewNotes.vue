@@ -16,7 +16,8 @@
       </div>
     </div>
 
-    <Note v-for="note in storeNotes.notes" :key="note.id" :note @deleteClicked="deleteNote"/>  <!-- using v-for derivative iterating the entries in the notes reactive object. Added a new prop ":note" so that the reactive object values can be accessed in the child components in "@/components/Notes/Note.vue". Using the same emit we are now calling a custom event-->
+    <!-- <Note v-for="note in storeNotes.notes" :key="note.id" :note @deleteClicked="deleteNote"/>  using v-for derivative iterating the entries in the notes reactive object. Added a new prop ":note" so that the reactive object values can be accessed in the child components in "@/components/Notes/Note.vue". Using the same emit we are now calling a custom event -->
+    <Note v-for="note in storeNotes.notes" :key="note.id" :note/>  <!-- using v-for derivative iterating the entries in the notes reactive object. Added a new prop ":note" so that the reactive object values can be accessed in the child components in "@/components/Notes/Note.vue". Now we are using pinia store so delete functionlaity is all being handled from child component Note.vue-->
     
   </div>
 </template>
@@ -68,10 +69,10 @@ const addNewNote = () => { // button click function
 
 }
 
-const deleteNote = (id) => { // fetching the passed param from emit in this function
-  console.log('in deleteNote', id);
-  notes.value = notes.value.filter(note => {return note.id != id}) // using filter hiding the passed note id
+// const deleteNote = (id) => { // fetching the passed param from emit in this function
+//   console.log('in deleteNote', id);
+//   notes.value = notes.value.filter(note => {return note.id != id}) // using filter hiding the passed note id
   
-}
+// }
 
 </script>

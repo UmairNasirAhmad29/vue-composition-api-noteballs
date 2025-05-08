@@ -11,14 +11,14 @@
 
       <footer class="card-footer">
         <a href="#" class="card-footer-item">Edit</a>
-        <a href="#" class="card-footer-item" @click.prevent="handleDeleteClick">Delete</a>
+        <a href="#" class="card-footer-item" @click.prevent="storeNotes.deleteNote(note.id)">Delete</a>
       </footer>
     </div>
 </template>
 
 <script setup>
 import { computed, handleError } from 'vue';
-
+import { useStoreNotes } from '@/stores/storeNotes';
     const props = defineProps({ // defining the prop that is being used in "@/views/ViewNotes.vue"
         note: {
             type: Object,
@@ -33,10 +33,12 @@ import { computed, handleError } from 'vue';
         return `${charLength} ${description}` // returning the value in template string so the character length and description can returned as a concatination
     })
 
-    const emit = defineEmits(['deleteClicked']) // defining emit so it can be triggered from parent component i.e, ViewNotes.vue
+    const storeNotes = useStoreNotes()
 
-    const handleDeleteClick = () => {
-      emit('deleteClicked', props.note.id) // setting emit and note id as param on button click
+    // const emit = defineEmits(['deleteClicked']) // defining emit so it can be triggered from parent component i.e, ViewNotes.vue
+
+    // const handleDeleteClick = () => {
+    //   emit('deleteClicked', props.note.id) // setting emit and note id as param on button click
       
-    }
+    // }
 </script>
