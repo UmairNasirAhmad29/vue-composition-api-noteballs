@@ -17,7 +17,7 @@ const route = [
     component: ViewStats,
   },
   {
-    path: "/edit",
+    path: "/edit/:id",
     name: "edit",
     component: ViewEdit
   }
