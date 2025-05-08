@@ -39,6 +39,13 @@
           >
             Stats
           </RouterLink>
+          <RouterLink
+            to="/edit"
+            active-class="is-active"
+            class="navbar-item is-size-5 is-family-monospace has-text-white"
+          >
+            Edit
+          </RouterLink>
         </div>
       </div>
     </div>

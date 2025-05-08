@@ -1,6 +1,7 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import ViewNotes from "@/views/ViewNotes.vue";
 import ViewStats from "@/views/ViewStats.vue";
+import ViewEdit from "@/views/ViewEdit.vue"
 
 const route = [
   // before creating the routes make sure that you have created the views for those routes
@@ -15,6 +16,11 @@ const route = [
     name: "stats",
     component: ViewStats,
   },
+  {
+    path: "/edit",
+    name: "edit",
+    component: ViewEdit
+  }
 ];
 
 const router = createRouter({
