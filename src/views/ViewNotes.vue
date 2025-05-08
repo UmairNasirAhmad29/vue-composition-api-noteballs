@@ -47,18 +47,22 @@ const foucsTextareaRef = ref(null) // declared a new ref and set it to null so i
 const addNewNote = () => { // button click function
 
   console.log('in addNewNote button click');
-
-  let currentDate = new Date().getTime()
-  let id = currentDate.toString() // getting, converting and storing the current date as an id in the id index of array
-
-  let note = { // created an array to to store id and new ref newNote.value in the array
-    id: id,
-    content: newNote.value
-  }
-
-  // console.log(note);
+  console.log('newNote', newNote.value);
   
-  notes.value.unshift(note) // using unshift to store the latest entry at the top
+
+  storeNotes.addNewNote(newNote.value)
+
+  // let currentDate = new Date().getTime()
+  // let id = currentDate.toString() // getting, converting and storing the current date as an id in the id index of array
+
+  // let note = { // created an array to to store id and new ref newNote.value in the array
+  //   id: id,
+  //   content: newNote.value
+  // }
+
+  // // console.log(note);
+  
+  // notes.value.unshift(note) // using unshift to store the latest entry at the top
   newNote.value = '' // setting the newNote ref value to empty
   foucsTextareaRef.value.focus() // setting the focusTextareaRef to focus
 

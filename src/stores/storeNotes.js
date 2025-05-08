@@ -20,4 +20,23 @@ export const useStoreNotes = defineStore("storeNotes", {
       ],
     };
   },
+  actions: {
+    addNewNote(newNote) {
+      console.log("addNewNote");
+      console.log("newNote", newNote);
+
+      let currentDate = new Date().getTime();
+      let id = currentDate.toString(); // getting, converting and storing the current date as an id in the id index of array
+
+      let note = {
+        // created an array to to store id and new ref newNote.value in the array
+        id: id,
+        content: newNote,
+      };
+
+      // console.log(note);
+      this.notes.unshift(note);
+      //   notes.value.unshift(note); // using unshift to store the latest entry at the top
+    },
+  },
 });
