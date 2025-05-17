@@ -44,4 +44,12 @@ export const useStoreNotes = defineStore("storeNotes", {
       }); // using filter hiding the passed note id
     },
   },
+  getters: {
+    getNoteContent: (state) => {
+
+      return (id) => {
+        return state.notes.filter(note => { return note.id == id })[0].content
+      }
+    }
+  }
 });
