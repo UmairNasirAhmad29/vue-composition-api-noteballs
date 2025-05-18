@@ -11,6 +11,7 @@
           class="textarea"
           :placeholder="placeHolder"
           ref="textareaRef"
+          v-autofocus
         />
         <!-- added v-model to get values in the sctipt-->
       </div>
@@ -25,6 +26,8 @@
 </template>
 
 <script setup>
+import { vAutofocus } from '@/directives/vAutofocus';
+
 const props = defineProps({
   modelValue: {
     type: String,
