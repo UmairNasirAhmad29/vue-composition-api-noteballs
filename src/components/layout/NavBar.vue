@@ -26,6 +26,7 @@
       >
         <div class="navbar-end">
           <RouterLink
+            @click="showMobileMenu=false"
             to="/"
             active-class="is-active"
             class="navbar-item is-size-5 is-family-monospace has-text-white"
@@ -33,6 +34,7 @@
             Notes
           </RouterLink>
           <RouterLink
+            @click="showMobileMenu=false"
             to="/stats"
             active-class="is-active"
             class="navbar-item is-size-5 is-family-monospace has-text-white"

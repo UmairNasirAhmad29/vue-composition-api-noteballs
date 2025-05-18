@@ -7,7 +7,7 @@
       label="Edit Note"
     >
       <template #buttons>
-        <RouterLink to="/" class="button is-link is-light">
+        <RouterLink to="/" class="button is-link is-light mr-3">
           <!-- added click function, added disabled prop when area is empty, also addeda ref to focus -->
           Cancel
         </RouterLink>
@@ -15,6 +15,7 @@
           class="button is-link has-background-link-dark"
           ref="foucsTextareaRef"
           :disabled="!noteContent"
+          @click="handleSaveClick"
         >
           <!-- added click function, added disabled prop when area is empty, also addeda ref to focus -->
           Save Note
@@ -28,11 +29,22 @@
 import addEditNote from "@/components/Notes/AddEditNote.vue";
 import { ref } from "vue";
 import { useStoreNotes } from "@/stores/storeNotes";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 
 const noteContent = ref("")
 const route = useRoute()
+const router = useRouter()
 const storeNotes = useStoreNotes()
 noteContent.value = storeNotes.getNoteContent(route.params.id)
+
+const handleSaveClick = () => {
+
+  console.log('id: ', route.params.id);
+  console.log('content: ', noteContent.value);
+
+  storeNotes.updateAction(route.params.id, noteContent.value)
+  router.push('/')
+
+}
 
 </script>
