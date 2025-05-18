@@ -45,11 +45,4 @@ const characterLength = computed(() => {
 });
 
 const storeNotes = useStoreNotes();
-
-// const emit = defineEmits(['deleteClicked']) // defining emit so it can be triggered from parent component i.e, ViewNotes.vue
-
-// const handleDeleteClick = () => {
-//   emit('deleteClicked', props.note.id) // setting emit and note id as param on button click
-
-// }
 </script>
