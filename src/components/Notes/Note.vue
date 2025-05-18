@@ -17,17 +17,19 @@
       <a
         href="#"
         class="card-footer-item"
-        @click.prevent="storeNotes.deleteNote(note.id)"
+        @click.prevent="modals.deleteNote = true"
         >Delete</a
       >
     </footer>
+    <ModalDeleteNote v-if="modals.deleteNote" v-model="modals.deleteNote" :noteId="note.id"/>
   </div>
 </template>
 
 <script setup>
-import { computed, handleError } from "vue";
+import { computed, handleError, reactive } from "vue";
 import { useStoreNotes } from "@/stores/storeNotes";
 import { RouterLink } from "vue-router";
+import ModalDeleteNote from "@/components/Notes/ModalDeleteNote.vue";
 const props = defineProps({
   // defining the prop that is being used in "@/views/ViewNotes.vue"
   note: {
@@ -45,4 +47,8 @@ const characterLength = computed(() => {
 });
 
 const storeNotes = useStoreNotes();
+
+const modals = reactive({
+  deleteNote: false,
+});
 </script>
