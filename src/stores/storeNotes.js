@@ -6,6 +6,7 @@ import {
   setDoc,
   doc,
   deleteDoc,
+  updateDoc,
 } from "firebase/firestore";
 import { db } from "@/js/firebase";
 
@@ -66,14 +67,17 @@ export const useStoreNotes = defineStore("storeNotes", {
       // }); // using filter hiding the passed note id
 
       await deleteDoc(doc(notesCollectionRef, id));
-
     },
-    updateAction(id, content) {
+    async updateAction(id, content) {
       // getting index of the note from notes array using id param
-      let index = this.notes.findIndex((note) => {
-        return note.id === id;
+      // let index = this.notes.findIndex((note) => {
+      //   return note.id === id;
+      // });
+      // this.notes[index].content = content;
+
+      await updateDoc(doc(notesCollectionRef, id), {
+        content: content,
       });
-      this.notes[index].content = content;
     },
   },
   getters: {
