@@ -31,20 +31,14 @@ import { ref } from "vue";
 import { useStoreNotes } from "@/stores/storeNotes";
 import { useRoute, useRouter } from "vue-router";
 
-const noteContent = ref("")
-const route = useRoute()
-const router = useRouter()
-const storeNotes = useStoreNotes()
-noteContent.value = storeNotes.getNoteContent(route.params.id)
+const noteContent = ref("");
+const route = useRoute();
+const router = useRouter();
+const storeNotes = useStoreNotes();
+noteContent.value = storeNotes.getNoteContent(route.params.id);
 
 const handleSaveClick = () => {
-
-  console.log('id: ', route.params.id);
-  console.log('content: ', noteContent.value);
-
-  storeNotes.updateAction(route.params.id, noteContent.value)
-  router.push('/')
-
-}
-
+  storeNotes.updateAction(route.params.id, noteContent.value);
+  router.push("/");
+};
 </script>

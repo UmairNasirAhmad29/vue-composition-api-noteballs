@@ -22,7 +22,11 @@
         >Delete</a
       >
     </footer>
-    <ModalDeleteNote v-if="modals.deleteNote" v-model="modals.deleteNote" :noteId="note.id"/>
+    <ModalDeleteNote
+      v-if="modals.deleteNote"
+      v-model="modals.deleteNote"
+      :noteId="note.id"
+    />
   </div>
 </template>
 
@@ -51,14 +55,11 @@ const characterLength = computed(() => {
 const storeNotes = useStoreNotes();
 
 const dateFormatted = computed(() => {
-  let date = new Date(parseInt(props.note.date))
-  let formattedDate = useDateFormat(date, 'YYYY-MM-DD HH:mm:ss')
+  let date = new Date(parseInt(props.note.date));
+  let formattedDate = useDateFormat(date, "YYYY-MM-DD HH:mm:ss");
 
-  console.log('formattedDate :: ',formattedDate);
-  
-
-  return formattedDate.value
-})
+  return formattedDate.value;
+});
 
 const modals = reactive({
   deleteNote: false,

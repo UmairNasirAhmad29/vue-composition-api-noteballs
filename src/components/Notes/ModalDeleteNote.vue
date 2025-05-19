@@ -12,7 +12,12 @@
       <footer class="modal-card-foot is-justify-content-flex-end">
         <div class="buttons">
           <button class="button" @click="closeModal">Cancel</button>
-          <button class="button is-danger" @click="storeNotes.deleteNote(noteId)">Delete</button>
+          <button
+            class="button is-danger"
+            @click="storeNotes.deleteNote(noteId)"
+          >
+            Delete
+          </button>
         </div>
       </footer>
     </div>
@@ -27,21 +32,19 @@ import { useStoreNotes } from "@/stores/storeNotes";
 const props = defineProps({
   modelValue: {
     type: Boolean,
-    default: false
+    default: false,
   },
   noteId: {
     type: String,
-    requred: true
-  }
+    requred: true,
+  },
 });
 
 const emit = defineEmits(["update:modelValue"]);
 
-const storeNotes = useStoreNotes()
+const storeNotes = useStoreNotes();
 
 const closeModal = () => {
-  console.log("close modal clicked");
-
   emit("update:modelValue", false);
 };
 
@@ -70,5 +73,4 @@ onUnmounted(() => {
 //     closeModal()
 
 // }
-
 </script>

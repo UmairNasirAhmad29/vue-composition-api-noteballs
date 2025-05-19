@@ -1,6 +1,5 @@
 <template>
   <div class="notes">
-
     <addEditNote v-model="newNote" placeHolder="Add a new note">
       <template #buttons>
         <button
@@ -15,7 +14,10 @@
       </template>
     </addEditNote>
 
-    <Note v-for="note in storeNotes.notes" :key="note.id" :note />
+    <progress class="progress is-large is-success" max="100" v-if="!storeNotes.notesLoaded" />
+    <template v-else>
+      <Note v-for="note in storeNotes.notes" :key="note.id" :note />
+    </template>
     <!-- using v-for derivative iterating the entries in the notes reactive object. Added a new prop ":note" so that the reactive object values can be accessed in the child components in "@/components/Notes/Note.vue". Now we are using pinia store so delete functionlaity is all being handled from child component Note.vue-->
   </div>
 </template>
