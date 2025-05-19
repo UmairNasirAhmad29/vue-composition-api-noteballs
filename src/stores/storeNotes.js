@@ -1,27 +1,25 @@
 import { defineStore } from "pinia";
+import { collection, getDocs } from "firebase/firestore";
 import { db } from "@/js/firebase";
 
 export const useStoreNotes = defineStore("storeNotes", {
   state: () => {
     return {
-      notes: [
-        {
-          id: "id1",
-          content:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores ea officia quaerat velit aspernatur, numquam repellendus officiis exercitationem in magnam, accusantium doloribus cum quam iure vel sunt, laboriosam libero eos!",
-        },
-        {
-          id: "id2",
-          content: "This is a shorter note",
-        },
-        {
-          id: "id3",
-          content: "This is an another shorter note",
-        },
-      ],
+      notes: [],
     };
   },
   actions: {
+    async getNotes() {
+      //added async keyword at the start of the function as the get doc is using await method and that is async so we have to set our method async aswell
+      const querySnapshot = await getDocs(collection(db, "notes"));
+      querySnapshot.forEach((doc) => {
+        let note = {
+          id: doc.id,
+          content: doc.data().content,
+        };
+        this.notes.unshift(note);
+      });
+    },
     addNewNote(newNote) {
       console.log("addNewNote");
       console.log("newNote", newNote);
