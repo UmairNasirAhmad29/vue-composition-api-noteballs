@@ -1,7 +1,8 @@
 import { defineStore } from "pinia";
-import { collection, getDocs, onSnapshot } from "firebase/firestore";
+import { collection, getDocs, onSnapshot, setDoc, doc } from "firebase/firestore";
 import { db } from "@/js/firebase";
 
+const notesCollectionRef = collection(db, "notes")
 export const useStoreNotes = defineStore("storeNotes", {
   state: () => {
     return {
@@ -21,7 +22,7 @@ export const useStoreNotes = defineStore("storeNotes", {
       //   this.notes.unshift(note);
       // });
 
-      onSnapshot(collection(db, "notes"), (querySnapshot) => {
+      onSnapshot(notesCollectionRef, (querySnapshot) => {
         let notesArray = [];
         querySnapshot.forEach((doc) => {
           let note = {
@@ -33,22 +34,24 @@ export const useStoreNotes = defineStore("storeNotes", {
         this.notes = notesArray;
       });
     },
-    addNewNote(newNote) {
+    async addNewNote(newNote) {
       console.log("addNewNote");
       console.log("newNote", newNote);
 
       let currentDate = new Date().getTime();
       let id = currentDate.toString(); // getting, converting and storing the current date as an id in the id index of array
 
-      let note = {
-        // created an array to to store id and new ref newNote.value in the array
-        id: id,
-        content: newNote,
-      };
+      // let note = {
+      //   // created an array to to store id and new ref newNote.value in the array
+      //   id: id,
+      //   content: newNote,
+      // };
+      // this.notes.unshift(note);
+      // notes.value.unshift(note); // using unshift to store the latest entry at the top
 
-      // console.log(note);
-      this.notes.unshift(note);
-      //   notes.value.unshift(note); // using unshift to store the latest entry at the top
+      await setDoc(doc(notesCollectionRef, id), {
+        content: newNote
+      });
     },
     deleteNote(id) {
       this.notes = this.notes.filter((note) => {
