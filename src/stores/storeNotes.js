@@ -4,6 +4,7 @@ import {
   getDocs,
   onSnapshot,
   setDoc,
+  addDoc,
   doc,
   deleteDoc,
   updateDoc,
@@ -14,7 +15,7 @@ import {
 import { db } from "@/js/firebase";
 
 const notesCollectionRef = collection(db, "notes");
-const getCollectionQuery = query(notesCollectionRef, orderBy("id", "desc"))
+const getCollectionQuery = query(notesCollectionRef, orderBy("date", "desc"));
 
 export const useStoreNotes = defineStore("storeNotes", {
   state: () => {
@@ -48,11 +49,8 @@ export const useStoreNotes = defineStore("storeNotes", {
       });
     },
     async addNewNote(newNote) {
-      console.log("addNewNote");
-      console.log("newNote", newNote);
-
       let currentDate = new Date().getTime();
-      let id = currentDate.toString(); // getting, converting and storing the current date as an id in the id index of array
+      let date = currentDate.toString(); // getting, converting and storing the current date as an id in the id index of array
 
       // let note = {
       //   // created an array to to store id and new ref newNote.value in the array
@@ -62,9 +60,14 @@ export const useStoreNotes = defineStore("storeNotes", {
       // this.notes.unshift(note);
       // notes.value.unshift(note); // using unshift to store the latest entry at the top
 
-      await setDoc(doc(notesCollectionRef, id), {
-        id: id,
+      // await setDoc(doc(notesCollectionRef, id), {
+      //   id: id,
+      //   content: newNote,
+      // });
+
+      await addDoc(notesCollectionRef, {
         content: newNote,
+        date: date,
       });
     },
     async deleteNote(id) {
