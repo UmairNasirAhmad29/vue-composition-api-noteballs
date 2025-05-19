@@ -7,10 +7,15 @@ import {
   doc,
   deleteDoc,
   updateDoc,
+  query,
+  orderBy,
+  limit,
 } from "firebase/firestore";
 import { db } from "@/js/firebase";
 
 const notesCollectionRef = collection(db, "notes");
+const getCollectionQuery = query(notesCollectionRef, orderBy("id", "desc"))
+
 export const useStoreNotes = defineStore("storeNotes", {
   state: () => {
     return {
@@ -30,14 +35,14 @@ export const useStoreNotes = defineStore("storeNotes", {
       //   this.notes.unshift(note);
       // });
 
-      onSnapshot(notesCollectionRef, (querySnapshot) => {
+      onSnapshot(getCollectionQuery, (querySnapshot) => {
         let notesArray = [];
         querySnapshot.forEach((doc) => {
           let note = {
             id: doc.id,
             content: doc.data().content,
           };
-          notesArray.unshift(note);
+          notesArray.push(note);
         });
         this.notes = notesArray;
       });
@@ -58,6 +63,7 @@ export const useStoreNotes = defineStore("storeNotes", {
       // notes.value.unshift(note); // using unshift to store the latest entry at the top
 
       await setDoc(doc(notesCollectionRef, id), {
+        id: id,
         content: newNote,
       });
     },
