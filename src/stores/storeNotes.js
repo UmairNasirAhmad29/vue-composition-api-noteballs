@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, onSnapshot } from "firebase/firestore";
 import { db } from "@/js/firebase";
 
 export const useStoreNotes = defineStore("storeNotes", {
@@ -11,13 +11,26 @@ export const useStoreNotes = defineStore("storeNotes", {
   actions: {
     async getNotes() {
       //added async keyword at the start of the function as the get doc is using await method and that is async so we have to set our method async aswell
-      const querySnapshot = await getDocs(collection(db, "notes"));
-      querySnapshot.forEach((doc) => {
-        let note = {
-          id: doc.id,
-          content: doc.data().content,
-        };
-        this.notes.unshift(note);
+
+      // const querySnapshot = await getDocs(collection(db, "notes"));
+      // querySnapshot.forEach((doc) => {
+      //   let note = {
+      //     id: doc.id,
+      //     content: doc.data().content,
+      //   };
+      //   this.notes.unshift(note);
+      // });
+
+      onSnapshot(collection(db, "notes"), (querySnapshot) => {
+        let notesArray = [];
+        querySnapshot.forEach((doc) => {
+          let note = {
+            id: doc.id,
+            content: doc.data().content,
+          };
+          notesArray.unshift(note);
+        });
+        this.notes = notesArray;
       });
     },
     addNewNote(newNote) {
