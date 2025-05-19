@@ -1,8 +1,15 @@
 import { defineStore } from "pinia";
-import { collection, getDocs, onSnapshot, setDoc, doc } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  onSnapshot,
+  setDoc,
+  doc,
+  deleteDoc,
+} from "firebase/firestore";
 import { db } from "@/js/firebase";
 
-const notesCollectionRef = collection(db, "notes")
+const notesCollectionRef = collection(db, "notes");
 export const useStoreNotes = defineStore("storeNotes", {
   state: () => {
     return {
@@ -50,13 +57,16 @@ export const useStoreNotes = defineStore("storeNotes", {
       // notes.value.unshift(note); // using unshift to store the latest entry at the top
 
       await setDoc(doc(notesCollectionRef, id), {
-        content: newNote
+        content: newNote,
       });
     },
-    deleteNote(id) {
-      this.notes = this.notes.filter((note) => {
-        return note.id != id;
-      }); // using filter hiding the passed note id
+    async deleteNote(id) {
+      // this.notes = this.notes.filter((note) => {
+      //   return note.id != id;
+      // }); // using filter hiding the passed note id
+
+      await deleteDoc(doc(notesCollectionRef, id));
+
     },
     updateAction(id, content) {
       // getting index of the note from notes array using id param
