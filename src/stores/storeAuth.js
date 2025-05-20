@@ -21,9 +21,11 @@ export const useStoreAuth = defineStore("storeAuth", {
           console.log('user: ',user);
           
           this.user.uid = user.uid
-          this.user.email = user.email          
+          this.user.email = user.email
+          this.router.push('/')  
         } else {
           this.user = {}
+          this.router.replace('/auth')
           console.log('user: ',user);
         }
       });

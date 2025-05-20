@@ -34,7 +34,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import Note from "@/components/Notes/Note.vue"; // importing the new child component created at "@/components/Notes/Note.vue"
 import addEditNote from "@/components/Notes/AddEditNote.vue"; // importing the new child component created at "@/components/Notes/AddEditNote.vue as the card functionality is moved there so it can re used"
 import { useStoreNotes } from "@/stores/storeNotes";
