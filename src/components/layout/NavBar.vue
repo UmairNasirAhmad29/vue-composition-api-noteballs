@@ -41,6 +41,9 @@
           >
             Stats
           </RouterLink>
+          <button class="button is-small is-info mt-3 ml-3">
+            Logout
+          </button>
         </div>
       </div>
     </div>

@@ -13,34 +13,77 @@
     <div class="card auth-form">
       <div class="card-content">
         <div class="title has-text-centered">
-            {{formTitle}}
+          {{ formTitle }}
         </div>
-        <div class="content">
-          Lorem ipsum leo risus, porta ac consectetur ac, vestibulum at eros.
-          Donec id elit non mi porta gravida at eget metus. Cum sociis natoque
-          penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-          Cras mattis consectetur purus sit amet fermentum.
-        </div>
+
+        <form @click.prevent="onSubmit">
+          <div class="field">
+            <label class="label">Email</label>
+            <div class="control">
+              <input
+                v-model="credentials.email"
+                class="input"
+                type="email"
+                placeholder="e.g. alexsmith@gmail.com"
+              />
+            </div>
+          </div>
+          <div class="field">
+            <label class="label">Password</label>
+            <div class="control">
+              <input
+                v-model="credentials.password"
+                class="input"
+                type="password"
+                placeholder="Enter your password"
+              />
+            </div>
+          </div>
+
+          <div class="field is-grouped is-grouped-right">
+            <p class="control">
+              <button class="button is-primary">{{ formTitle }}</button>
+            </p>
+          </div>
+        </form>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { computed, ref } from "vue";
+import { computed, reactive, ref } from "vue";
 
 const register = ref(false);
 
 // we have used computed property so that we can change the value based upon a condition and then return it. In our case we are returning the computed property value based upon wheter our ref is true or false
 const formTitle = computed(() => {
-    return register.value ? 'Regsiter' : 'Login'
-})
+  return register.value ? "Regsiter" : "Login";
+});
 
+// creating a reactive object to store the credentials and binding this reactive object to the fields using v-model
+const credentials = reactive({
+  email: "",
+  password: "",
+});
+
+const onSubmit = () => {
+  console.log("in onSubmit");
+  if (!credentials.email || !credentials.password) {
+    alert("Both are required fields");
+  } else {
+    if (!register.value) {
+      console.log("login user");
+    } else {
+      console.log("register user");
+    }
+  }
+};
 </script>
 
 <style>
-.auth-form{
-    max-width: 400px;
-    margin: 0 auto;
+.auth-form {
+  max-width: 400px;
+  margin: 0 auto;
 }
 </style>
