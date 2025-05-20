@@ -77,6 +77,7 @@ const onSubmit = () => {
   // } else {
     if (!register.value) {
       // login user
+      storeAuth.loginUser(credentials)
     } else {
       // register user
       storeAuth.registerUser(credentials)
