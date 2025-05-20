@@ -44,10 +44,11 @@
             Stats
           </RouterLink>
           <button
+            v-if="storeAuth.user.uid"
             @click.prevent="storeAuth.logoutUser"
-            class="button is-small is-info mt-3 ml-3"
+            class="button is-small is-info mt-3 ml-3 mb-3"
           >
-            Logout
+            Logout {{ storeAuth.user.email }}
           </button>
         </div>
       </div>
