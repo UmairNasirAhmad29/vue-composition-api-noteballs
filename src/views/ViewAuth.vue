@@ -53,6 +53,7 @@
 
 <script setup>
 import { computed, reactive, ref } from "vue";
+import { useStoreAuth } from "@/stores/storeAuth";
 
 const register = ref(false);
 
@@ -67,17 +68,20 @@ const credentials = reactive({
   password: "",
 });
 
+const storeAuth = useStoreAuth()
+
 const onSubmit = () => {
   console.log("in onSubmit");
-  if (!credentials.email || !credentials.password) {
-    alert("Both are required fields");
-  } else {
+  // if (!credentials.email || !credentials.password) {
+  //   alert("Both are required fields");
+  // } else {
     if (!register.value) {
-      console.log("login user");
+      // login user
     } else {
-      console.log("register user");
+      // register user
+      storeAuth.registerUser(credentials)
     }
-  }
+  // }
 };
 </script>
 
