@@ -4,13 +4,30 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
+  onAuthStateChanged,
 } from "firebase/auth";
 
 export const useStoreAuth = defineStore("storeAuth", {
   state: () => {
-    return {};
+    return {
+      user: {},
+    };
   },
   actions: {
+    init() {
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          console.log('user found and data being stored in the user state object');
+          console.log('user: ',user);
+          
+          this.user.uid = user.uid
+          this.user.email = user.email          
+        } else {
+          this.user = {}
+          console.log('user: ',user);
+        }
+      });
+    },
     registerUser(credentials) {
       console.log("registerUSer store function");
       createUserWithEmailAndPassword(

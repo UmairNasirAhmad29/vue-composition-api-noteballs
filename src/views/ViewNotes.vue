@@ -50,4 +50,8 @@ const addNewNote = () => {
   newNote.value = ""; // setting the newNote ref value to empty
   foucsTextareaRef.value.focus(); // setting the focusTextareaRef to focus
 };
+
+onMounted(() => {
+  storeNotes.getNotes();
+});
 </script>
