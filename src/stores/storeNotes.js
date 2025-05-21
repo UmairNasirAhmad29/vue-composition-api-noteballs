@@ -17,6 +17,7 @@ import { useStoreAuth } from "@/stores/storeAuth";
 
 let notesCollectionRef;
 let getCollectionQuery;
+let getNotesSnapShot;
 
 export const useStoreNotes = defineStore("storeNotes", {
   state: () => {
@@ -35,17 +36,9 @@ export const useStoreNotes = defineStore("storeNotes", {
     },
     async getNotes() {
       //added async keyword at the start of the function as the get doc is using await method and that is async so we have to set our method async aswell
+      if (getNotesSnapShot) getNotesSnapShot(); // added this so multipe users data don't replicate on other users when they are logged in.
 
-      // const querySnapshot = await getDocs(collection(db, "notes"));
-      // querySnapshot.forEach((doc) => {
-      //   let note = {
-      //     id: doc.id,
-      //     content: doc.data().content,
-      //   };
-      //   this.notes.unshift(note);
-      // });
-
-      onSnapshot(getCollectionQuery, (querySnapshot) => {
+      getNotesSnapShot = onSnapshot(getCollectionQuery, (querySnapshot) => {
         let notesArray = [];
         this.notesLoaded = false;
         querySnapshot.forEach((doc) => {
@@ -99,6 +92,9 @@ export const useStoreNotes = defineStore("storeNotes", {
       await updateDoc(doc(notesCollectionRef, id), {
         content: content,
       });
+    },
+    clearNotes() {
+      this.notes = [];
     },
   },
   getters: {

@@ -28,6 +28,7 @@ export const useStoreAuth = defineStore("storeAuth", {
           storeNotes.init()
         } else {
           this.user = {}
+          storeNotes.clearNotes()
           this.router.replace('/auth')
           console.log('user: ',user);
         }
