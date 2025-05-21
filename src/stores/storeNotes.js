@@ -17,7 +17,7 @@ import { useStoreAuth } from "@/stores/storeAuth";
 
 let notesCollectionRef;
 let getCollectionQuery;
-let getNotesSnapShot;
+let getNotesSnapShot = null;
 
 export const useStoreNotes = defineStore("storeNotes", {
   state: () => {

@@ -16,21 +16,23 @@ export const useStoreAuth = defineStore("storeAuth", {
   },
   actions: {
     init() {
-      const storeNotes = useStoreNotes()
+      const storeNotes = useStoreNotes();
       onAuthStateChanged(auth, (user) => {
         if (user) {
-          console.log('user found and data being stored in the user state object');
-          console.log('user: ',user);
-          
-          this.user.uid = user.uid
-          this.user.email = user.email
-          this.router.push('/')  
-          storeNotes.init()
+          console.log(
+            "user found and data being stored in the user state object"
+          );
+          console.log("user: ", user);
+
+          this.user.uid = user.uid;
+          this.user.email = user.email;
+          this.router.push("/");
+          storeNotes.init();
         } else {
-          this.user = {}
-          storeNotes.clearNotes()
-          this.router.replace('/auth')
-          console.log('user: ',user);
+          this.user = {};
+          storeNotes.clearNotes();
+          this.router.replace("/auth");
+          console.log("user: ", user);
         }
       });
     },
@@ -53,7 +55,6 @@ export const useStoreAuth = defineStore("storeAuth", {
       signInWithEmailAndPassword(auth, credentials.email, credentials.password)
         .then((userCredential) => {
           const user = userCredential.user;
-          console.log("user logged in :: ", user);
         })
         .catch((error) => {
           console.log("user login error :: ", error.message);
@@ -61,9 +62,7 @@ export const useStoreAuth = defineStore("storeAuth", {
     },
     logoutUser() {
       signOut(auth)
-        .then(() => {
-          console.log("user logged out");
-        })
+        .then(() => {})
         .catch((error) => {
           console.log("user logout function error :: ", error.message);
         });
