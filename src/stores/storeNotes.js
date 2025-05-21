@@ -13,9 +13,10 @@ import {
   limit,
 } from "firebase/firestore";
 import { db } from "@/js/firebase";
+import { useStoreAuth } from "@/stores/storeAuth";
 
-const notesCollectionRef = collection(db, "notes");
-const getCollectionQuery = query(notesCollectionRef, orderBy("date", "desc"));
+let notesCollectionRef;
+let getCollectionQuery;
 
 export const useStoreNotes = defineStore("storeNotes", {
   state: () => {
@@ -25,6 +26,14 @@ export const useStoreNotes = defineStore("storeNotes", {
     };
   },
   actions: {
+    init(){
+
+      const storeAuth = useStoreAuth();
+      notesCollectionRef = collection(db, "users", storeAuth.user.uid, "notes");
+      getCollectionQuery = query(notesCollectionRef, orderBy("date", "desc")); 
+
+      this.getNotes()
+    },
     async getNotes() {
       //added async keyword at the start of the function as the get doc is using await method and that is async so we have to set our method async aswell
 

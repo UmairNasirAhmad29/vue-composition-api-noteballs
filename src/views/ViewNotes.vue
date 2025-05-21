@@ -34,7 +34,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref } from "vue";
 import Note from "@/components/Notes/Note.vue"; // importing the new child component created at "@/components/Notes/Note.vue"
 import addEditNote from "@/components/Notes/AddEditNote.vue"; // importing the new child component created at "@/components/Notes/AddEditNote.vue as the card functionality is moved there so it can re used"
 import { useStoreNotes } from "@/stores/storeNotes";
@@ -50,8 +50,4 @@ const addNewNote = () => {
   newNote.value = ""; // setting the newNote ref value to empty
   foucsTextareaRef.value.focus(); // setting the focusTextareaRef to focus
 };
-
-onMounted(() => {
-  storeNotes.getNotes();
-});
 </script>

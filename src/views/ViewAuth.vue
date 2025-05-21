@@ -16,7 +16,7 @@
           {{ formTitle }}
         </div>
 
-        <form @click.prevent="onSubmit">
+        <form>
           <div class="field">
             <label class="label">Email</label>
             <div class="control">
@@ -42,7 +42,7 @@
 
           <div class="field is-grouped is-grouped-right">
             <p class="control">
-              <button class="button is-primary">{{ formTitle }}</button>
+              <button class="button is-primary" @click.prevent="onSubmit">{{ formTitle }}</button>
             </p>
           </div>
         </form>
