@@ -22,17 +22,16 @@ export const useStoreNotes = defineStore("storeNotes", {
   state: () => {
     return {
       notes: [],
-      notesLoaded: false
+      notesLoaded: false,
     };
   },
   actions: {
-    init(){
-
+    init() {
       const storeAuth = useStoreAuth();
       notesCollectionRef = collection(db, "users", storeAuth.user.uid, "notes");
-      getCollectionQuery = query(notesCollectionRef, orderBy("date", "desc")); 
+      getCollectionQuery = query(notesCollectionRef, orderBy("date", "desc"));
 
-      this.getNotes()
+      this.getNotes();
     },
     async getNotes() {
       //added async keyword at the start of the function as the get doc is using await method and that is async so we have to set our method async aswell
@@ -48,7 +47,7 @@ export const useStoreNotes = defineStore("storeNotes", {
 
       onSnapshot(getCollectionQuery, (querySnapshot) => {
         let notesArray = [];
-        this.notesLoaded = false
+        this.notesLoaded = false;
         querySnapshot.forEach((doc) => {
           let note = {
             id: doc.id,
@@ -58,7 +57,7 @@ export const useStoreNotes = defineStore("storeNotes", {
           notesArray.push(note);
         });
         this.notes = notesArray;
-        this.notesLoaded = true
+        this.notesLoaded = true;
       });
     },
     async addNewNote(newNote) {
