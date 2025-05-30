@@ -71,7 +71,6 @@ const credentials = reactive({
 const storeAuth = useStoreAuth()
 
 const onSubmit = () => {
-  console.log("in onSubmit");
   // if (!credentials.email || !credentials.password) {
   //   alert("Both are required fields");
   // } else {
