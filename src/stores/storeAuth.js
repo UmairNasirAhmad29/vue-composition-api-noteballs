@@ -19,10 +19,6 @@ export const useStoreAuth = defineStore("storeAuth", {
       const storeNotes = useStoreNotes();
       onAuthStateChanged(auth, (user) => {
         if (user) {
-          console.log(
-            "user found and data being stored in the user state object"
-          );
-          console.log("user: ", user);
 
           this.user.uid = user.uid;
           this.user.email = user.email;
@@ -32,12 +28,10 @@ export const useStoreAuth = defineStore("storeAuth", {
           this.user = {};
           storeNotes.clearNotes();
           this.router.replace("/auth");
-          console.log("user: ", user);
         }
       });
     },
     registerUser(credentials) {
-      console.log("registerUSer store function");
       createUserWithEmailAndPassword(
         auth,
         credentials.email,
@@ -45,7 +39,6 @@ export const useStoreAuth = defineStore("storeAuth", {
       )
         .then((userCredential) => {
           const user = userCredential.user;
-          console.log("user registration :: ", user);
         })
         .catch((error) => {
           console.log("user registration error :: ", error.message);

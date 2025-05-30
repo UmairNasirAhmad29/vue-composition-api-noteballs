@@ -27,3 +27,5 @@ npm run dev
 ```sh
 npm run build
 ```
+
+for db we are using firebase
